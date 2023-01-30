@@ -15,7 +15,7 @@ public class TextComponent extends AbstractTextComponent{
     public String operation() {
         StringBuilder totalPhrase = new StringBuilder();
         for (AbstractTextComponent textComponent:componentList) {
-            totalPhrase.append(textComponent.operation());
+            totalPhrase.append(textComponent.operation()).append(componentType.getDelimiter());
         }
         return totalPhrase.toString();
     }
