@@ -18,8 +18,13 @@ public class RectangleObserver implements Observer {
         double square = sideA * sideB;
         double perimeter = 2 * sideA + 2 * sideB;
 
-        rectangleValues.setSquare(square);
-        rectangleValues.setPerimeter(perimeter);
+        if (rectangleValues != null) {
+            rectangleValues.setSquare(square);
+            rectangleValues.setPerimeter(perimeter);
+        } else {
+            rectangleWarehouse.put(rectangle.getId(),new RectangleValues(square,perimeter));
+        }
+
     }
     // Write your code here!
 }

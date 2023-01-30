@@ -11,7 +11,7 @@ public class ManufactureFilteringStrategy implements FilteringStrategy {
 
     @Override
     public boolean filter(Product product) {
-        return product.getManufacture().toLowerCase().equals(manufacture);
+        return product.getManufacture().equalsIgnoreCase(manufacture);
     }
 
     // Write your code here!
