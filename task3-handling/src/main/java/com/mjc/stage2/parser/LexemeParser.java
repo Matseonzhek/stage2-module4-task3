@@ -12,22 +12,26 @@ public class LexemeParser extends AbstractTextParser {
     @Override
     public void parse(AbstractTextComponent abstractTextComponent, String string) {
         AbstractTextComponent textComponent = null;
-        if (abstractTextComponent.getComponentType().equals(TextComponentType.SYMBOL)) {
-            String[] parts = string.split(LEXEME_REGEX);
-            for (String part : parts) {
-                textComponent = new SymbolLeaf(part.charAt(0));
-                abstractTextComponent.add(textComponent);
-            }
-        } else {
-            String[] parts = string.split(WORD_REGEX);
-            for (String part : parts) {
-                textComponent = new TextComponent(TextComponentType.WORD);
-                nextParser.parse(textComponent,part);
-            }
+        if (abstractTextComponent.getComponentType().equals(TextComponentType.SENTENCE)) {
+            if (abstractTextComponent.getComponentType().equals(TextComponentType.SYMBOL)) {
+                String[] parts = string.split(LEXEME_REGEX);
+                for (String part : parts) {
+                    textComponent = new SymbolLeaf(part.charAt(0));
+                    abstractTextComponent.add(textComponent);
+                }
+            } else {
+                String[] parts = string.split(WORD_REGEX);
+                for (String part : parts) {
+                    textComponent = new TextComponent(TextComponentType.WORD);
+                    nextParser.parse(textComponent, part);
+                }
 
+            }
+            abstractTextComponent.add(textComponent);
+
+        } else if(nextParser!=null){
+            nextParser.parse(abstractTextComponent,string);
         }
-        abstractTextComponent.add(textComponent);
-
     }
 
     // Write your code here!
